@@ -50,6 +50,18 @@ $(document).ready(function() {
 		}
 	});
 
+	$("#salvarMultiplos").click(function(){
+		$.ajax({
+			url: "http://jsonplaceholder.typicode.com/users",
+			type: "GET"
+
+		})
+		.done(function( data ) {
+			alert(data[0].name);
+			console.log( data[0].name );
+		});	
+	});
+
 	$(document).on('click','#users div', function(){
 		var id = $(this).attr("id"); 
 		
