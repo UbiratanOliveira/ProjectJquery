@@ -57,8 +57,11 @@ $(document).ready(function() {
 
 		})
 		.done(function( data ) {
-			alert(data[0].name);
-			console.log( data[0].name );
+			var teste = 0;
+
+			users.concat( $( data ).toArray() );
+			alert( data );
+			console.log( users );
 		});	
 	});
 
