@@ -26,7 +26,7 @@ $(document).ready(function() {
 
 			users.push(user);
 
-			if(users.length == 1){
+			if(!$("#box hr").length){
 				$("#box").append("<hr>");
 				$("#box").append("<h1><strong>Usuários</strong></h1>");
 			}
@@ -46,7 +46,6 @@ $(document).ready(function() {
 
 			key++;
 
-			console.log(users);
 		}
 	});
 
@@ -56,11 +55,32 @@ $(document).ready(function() {
 			type: "GET"
 
 		})
-		.done(function( data ) {
-			var teste = 0;
+		.done(function( data) {
+			var arrayAPI = $.makeArray( data );
 
-			users.concat( $( data ).toArray() );
-			alert( data );
+			$.merge( users, arrayAPI);
+
+			if(!$("#box hr").length){
+				$("#box").append("<hr>");
+				$("#box").append("<h1><strong>Usuários</strong></h1>");
+				$("#box").show();
+			}
+
+			$.each( arrayAPI, function( index, value ){
+				var divUsers = document.getElementById('users');
+				var divNewUsers = document.createElement('div');
+
+				divNewUsers.setAttribute('id', 'divNewUsers' + key);
+				divUsers.appendChild(divNewUsers);
+
+    		   $('#divNewUsers' + key).append("<strong>Nome</strong>: " + value.name +  "<br />");
+    		   $('#divNewUsers' + key).append("<strong>Username</strong>: " + value.username +  "<br />");
+    		   $('#divNewUsers' + key).append("<strong>Email</strong>: " + value.email +  "<br />");
+    		   $('#divNewUsers' + key).append('<input type="button" id=removeUser' + key + ' value="Remover Usuário"><br /><br />');
+			   
+			   key++;
+			});
+
 			console.log( users );
 		});	
 	});
@@ -76,7 +96,6 @@ $(document).ready(function() {
         	$("#box").hide();
         	$("#box").empty();
         }
-        console.log(users);
 	});	
 });
 
