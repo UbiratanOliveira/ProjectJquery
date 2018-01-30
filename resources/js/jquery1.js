@@ -16,8 +16,6 @@ $(document).ready(function() {
 	
 	$( "#salvar" ).click(function() {
 		if(valida_form()){
-			$("#box").show();
-
 			var user = {
 				nome: $("#name").val(),
 				username: $("#username").val(),
@@ -26,10 +24,7 @@ $(document).ready(function() {
 
 			users.push(user);
 
-			if(!$("#box hr").length){
-				$("#box").append("<hr>");
-				$("#box").append("<h1><strong>Usuários</strong></h1>");
-			}
+			showBoxUsers();
 
 			var divUsers = document.getElementById('users');
 			var divNewUsers = document.createElement('div');
@@ -60,11 +55,7 @@ $(document).ready(function() {
 
 			$.merge( users, arrayAPI);
 
-			if(!$("#box hr").length){
-				$("#box").append("<hr>");
-				$("#box").append("<h1><strong>Usuários</strong></h1>");
-				$("#box").show();
-			}
+			showBoxUsers();
 
 			$.each( arrayAPI, function( index, value ){
 				var divUsers = document.getElementById('users');
@@ -123,4 +114,12 @@ function valida_form(){
 
 
 	return true;	
+}
+
+function showBoxUsers(){
+	if(!$("#box hr").length){
+		$("#box").append("<hr>");
+		$("#box").append("<h1><strong>Usuários</strong></h1>");			
+		$("#box").show();
+	}	
 }
